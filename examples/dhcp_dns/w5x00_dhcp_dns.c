@@ -45,14 +45,25 @@
  * Variables
  * ----------------------------------------------------------------------------------------------------
  */
+/* SPI */
+#define SPI_PORT spi0
+
+#define PIN_SCK 18
+#define PIN_MOSI 19
+#define PIN_MISO 16
+#define PIN_CS 17
+#define PIN_RST 20
+/* Use SPI DMA */
+#define USE_SPI_DMA // if you want to use SPI DMA, uncomment.
+
 /* Network */
 static wiz_NetInfo g_net_info =
     {
         .mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x56}, // MAC address
-        .ip = {192, 168, 11, 2},                     // IP address
+        .ip = {192, 168, 1, 55},                     // IP address
         .sn = {255, 255, 255, 0},                    // Subnet Mask
-        .gw = {192, 168, 11, 1},                     // Gateway
-        .dns = {8, 8, 8, 8},                         // DNS server
+        .gw = {192, 168, 1, 254},                     // Gateway
+        .dns = {192, 168, 1, 254},                         // DNS server
         .dhcp = NETINFO_DHCP                         // DHCP enable/disable
 };
 static uint8_t g_ethernet_buf[ETHERNET_BUF_MAX_SIZE] = {
@@ -63,11 +74,13 @@ static uint8_t g_ethernet_buf[ETHERNET_BUF_MAX_SIZE] = {
 static uint8_t g_dhcp_get_ip_flag = 0;
 
 /* DNS */
-static uint8_t g_dns_target_domain[] = "www.wiznet.io";
+static uint8_t g_dns_target_domain[] = "cox-watson.com";
 static uint8_t g_dns_target_ip[4] = {
     0,
 };
 static uint8_t g_dns_get_ip_flag = 0;
+
+
 
 /* Timer */
 static volatile uint16_t g_msec_cnt = 0;
